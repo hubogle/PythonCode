@@ -19,7 +19,22 @@ class Solution:
         for k, v in enumerate(zip(*strs)):
             if len(set(v)) > 1:
                 return strs[0][:k]
-        return min(strs)  # 当最短的字符串已经遍历完，直接返回最短的就可以了
+        return min(strs, key=len)  # 当最短的字符串已经遍历完，直接返回最短的就可以了
+
+    def longestCommonPrefix(self, strs):
+        """
+        常规解法，先找到最短的字符串，然后将其他的字符串，进行循环遍历寻找相同的字符串。
+        :param strs:
+        :return:
+        """
+        if not strs:
+            return ''
+        short_str = min(strs, key=len)
+        for k, v in enumerate(short_str):
+            for i in strs:
+                if i[k] != v:
+                    return short_str[:k]
+        return short_str
 
 
 if __name__ == '__main__':
